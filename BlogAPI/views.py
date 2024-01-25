@@ -95,3 +95,18 @@ class DetailedBlogMixin(mixins.CreateModelMixin,
     # delete here works with self.destroy
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+    
+
+## Generic views
+# get list of blogs
+class ListBlogsGeneric(generics.ListAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+
+# crud on single blog
+class DetailedBlogGeneric(generics.CreateAPIView,
+                          generics.DestroyAPIView,
+                          generics.RetrieveAPIView,
+                          generics.UpdateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
