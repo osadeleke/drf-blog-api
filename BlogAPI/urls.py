@@ -1,15 +1,11 @@
-from django.urls import path, include
-from . import views
-from .views import ListBlog, DetailedBlog, ListBlogsMixin, DetailedBlogMixin, ListBlogsGeneric, DetailedBlogGeneric
+from django.urls import path
+from .views import Blogs, DetailedBlog, Comments, DetailedComment
+
+
 
 urlpatterns = [
-    path('bloglist', views.bloglist, name='bloglist'),
-    path('allbloglist', ListBlog.as_view(), name='allbloglist', ),
-    path('blog/<int:id>', DetailedBlog.as_view(), name='detailedblog'),
-    # mixinx views
-    path('mixinallblogs', ListBlogsMixin.as_view(), name='mbv'),
-    path('mixinblog/<int:pk>', DetailedBlogMixin.as_view(), name='dbv'),
-    # generic views
-    path('genericlist', ListBlogsGeneric.as_view(), name='lbg'),
-    path('genericdetail/<int:pk>', DetailedBlogGeneric.as_view(), name='dbg'),
+    path('blogs', Blogs.as_view(), name='bloglist'),
+    path('<int:blog_id>', DetailedBlog.as_view(), name='detailedblog'),
+    path('<int:blog_id>/comments', Comments.as_view(), name='comment'),
+    path('comment/<int:comment_id>', DetailedComment.as_view(), name='comment'),
 ]
